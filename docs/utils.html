@@ -156,6 +156,18 @@
 <dt id="utils.CodeMemo">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">CodeMemo</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#CodeMemo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.CodeMemo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Serialized memoization class for medium running scripts (seconds to minutes).
+The results of the decorated functions are serialized to pickles in the ./saved folder.
+Pickles are named using the md5 hash of code before the function call (ingoring imports and formatting.)
+If the code before the decorated function call is unchanged the results are retrieved from the pickles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fn</strong> – The function being decorated.</p></li>
+<li><p><strong>threshold</strong> – The maximum size (in MegaBytes) of the ./saved folder before older memos are deleted.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="utils.CodeMemo.state">
 <code class="sig-name descname"><span class="pre">state</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#CodeMemo.state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.CodeMemo.state" title="Permalink to this definition">¶</a></dt>
@@ -171,17 +183,31 @@
 <dl class="py method">
 <dt id="utils.Log.get">
 <code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Log.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Log.get" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the recorded values for name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – the variable whose recorded values need to be returned.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of recorded values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="utils.Log.record">
 <code class="sig-name descname"><span class="pre">record</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Log.record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Log.record" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inspects current and calling frames to record the value of tracked variables.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="utils.Log.track">
 <code class="sig-name descname"><span class="pre">track</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Log.track"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Log.track" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Adds names to list of tracked variables.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -189,117 +215,114 @@
 <dt id="utils.StopWatch">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">StopWatch</span></code><a class="reference internal" href="_modules/utils.html#StopWatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.StopWatch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A simple class implementing a stopwatch</p>
 <dl class="py method">
 <dt id="utils.StopWatch.elapsed">
 <code class="sig-name descname"><span class="pre">elapsed</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#StopWatch.elapsed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.StopWatch.elapsed" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Formats and return elapsed time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>the elapsed time.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="utils.StopWatch.start">
 <code class="sig-name descname"><span class="pre">start</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#StopWatch.start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.StopWatch.start" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Start the stopwatch and raises an error if already running.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="utils.StopWatch.stop">
 <code class="sig-name descname"><span class="pre">stop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#StopWatch.stop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.StopWatch.stop" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Stops the stopwatch and raises an error if it hadn’t been started.</p>
+</dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
-<dt id="utils.bcolors">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">bcolors</span></code><a class="reference internal" href="_modules/utils.html#bcolors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.bcolors" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt id="utils.bcolors.BOLD">
-<code class="sig-name descname"><span class="pre">BOLD</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[1m'</span></em><a class="headerlink" href="#utils.bcolors.BOLD" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.ENDC">
-<code class="sig-name descname"><span class="pre">ENDC</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[0m'</span></em><a class="headerlink" href="#utils.bcolors.ENDC" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.FAIL">
-<code class="sig-name descname"><span class="pre">FAIL</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[91m'</span></em><a class="headerlink" href="#utils.bcolors.FAIL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.HEADER">
-<code class="sig-name descname"><span class="pre">HEADER</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[95m'</span></em><a class="headerlink" href="#utils.bcolors.HEADER" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.OKBLUE">
-<code class="sig-name descname"><span class="pre">OKBLUE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[94m'</span></em><a class="headerlink" href="#utils.bcolors.OKBLUE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.OKCYAN">
-<code class="sig-name descname"><span class="pre">OKCYAN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[96m'</span></em><a class="headerlink" href="#utils.bcolors.OKCYAN" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.OKGREEN">
-<code class="sig-name descname"><span class="pre">OKGREEN</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[92m'</span></em><a class="headerlink" href="#utils.bcolors.OKGREEN" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.UNDERLINE">
-<code class="sig-name descname"><span class="pre">UNDERLINE</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[4m'</span></em><a class="headerlink" href="#utils.bcolors.UNDERLINE" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="utils.bcolors.WARNING">
-<code class="sig-name descname"><span class="pre">WARNING</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'\x1b[93m'</span></em><a class="headerlink" href="#utils.bcolors.WARNING" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dl class="py function">
+<dt id="utils.color">
+<code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">color</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>Color text for better terminal visibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>str</em>) – The text to be colored.</p></li>
+<li><p><strong>c</strong> (<em>str</em>) – The desired color: “green”, “red” or “warn”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Colored version of the desired text</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="utils.flatten">
 <code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">flatten</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.flatten" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Turns a list lists into a flat list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>e.g. [[1,2,3],[a,b,c]] becomes [1,2,3,a,b,c]</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="utils.folder_size">
 <code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">folder_size</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">folder</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#folder_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.folder_size" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt id="utils.green">
-<code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">green</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#green"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.green" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Calculates size of folder in MegaBytes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>folder</strong> – path of the target folder</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Folder size in MegaBytes</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py function">
 <dt id="utils.iprint">
 <code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">iprint</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smart</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#iprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.iprint" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt id="utils.red">
-<code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">red</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#red"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.red" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Enhance prints in scripts with line info and caller stack.
+Lists are truncated and dictionaries are formatted with pretty-print.</p>
+</dd></dl>
 
 <dl class="py function">
 <dt id="utils.search_scopes">
 <code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">search_scopes</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#search_scopes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.search_scopes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search name in current and calling frames
-:param name: variable name
-:type name: str
-:return: value of the variable “name”, None if not found.</p>
+<dd><p>Search name in current and outer frames.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – variable name</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>value of the variable “name”, None if not found.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="utils.unzip">
 <code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">unzip</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#unzip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.unzip" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt id="utils.warn">
-<code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">warn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#warn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.warn" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Transpose list of lists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<p>e.g. [[1,2,3],[a,b,c]] becomes [[1,a], [2,b], [3,c]]</p>
+</dd></dl>
 
 </div>
 

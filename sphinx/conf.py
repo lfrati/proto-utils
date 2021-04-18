@@ -13,7 +13,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../proto-utils/"))
+sys.path.insert(0, os.path.abspath("../protoutils/"))
 
 
 # -- Project information -----------------------------------------------------
