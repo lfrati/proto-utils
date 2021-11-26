@@ -176,13 +176,47 @@ If the code before the decorated function call is unchanged the results are retr
 </dd></dl>
 
 <dl class="py class">
-<dt id="utils.Log">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">Log</span></code><a class="reference internal" href="_modules/utils.html#Log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Log" title="Permalink to this definition">¶</a></dt>
+<dt id="utils.GracefulDeath">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">GracefulDeath</span></code><a class="reference internal" href="_modules/utils.html#GracefulDeath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.GracefulDeath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Simple logger to record the value of variables.</p>
+<p>A signal handler that allows triggering behaviour using CTRL+C and CTRL+Z.
+Use double CTRL+C to force stop or CTRL+Y to sent SIGQUIT</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">GracefulDeath</span><span class="p">()</span> <span class="k">as</span> <span class="n">cm</span><span class="p">:</span>
+
+    <span class="c1"># Do stuff</span>
+
+    <span class="k">if</span> <span class="n">cm</span><span class="o">.</span><span class="n">signalled</span><span class="p">():</span>
+        <span class="c1"># Do something and continue</span>
+    <span class="k">if</span> <span class="n">cm</span><span class="o">.</span><span class="n">killed</span><span class="p">():</span>
+        <span class="c1"># Do something before exiting</span>
+        <span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
 <dl class="py method">
-<dt id="utils.Log.get">
-<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Log.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Log.get" title="Permalink to this definition">¶</a></dt>
+<dt id="utils.GracefulDeath.handler">
+<code class="sig-name descname"><span class="pre">handler</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#GracefulDeath.handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.GracefulDeath.handler" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="utils.GracefulDeath.killed">
+<code class="sig-name descname"><span class="pre">killed</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#GracefulDeath.killed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.GracefulDeath.killed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="utils.GracefulDeath.signalled">
+<code class="sig-name descname"><span class="pre">signalled</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#GracefulDeath.signalled"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.GracefulDeath.signalled" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="utils.NameLog">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">NameLog</span></code><a class="reference internal" href="_modules/utils.html#NameLog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.NameLog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Logger to record the value of variables.</p>
+<dl class="py method">
+<dt id="utils.NameLog.get">
+<code class="sig-name descname"><span class="pre">get</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#NameLog.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.NameLog.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the recorded values for name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -198,14 +232,14 @@ If the code before the decorated function call is unchanged the results are retr
 </dd></dl>
 
 <dl class="py method">
-<dt id="utils.Log.record">
-<code class="sig-name descname"><span class="pre">record</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Log.record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Log.record" title="Permalink to this definition">¶</a></dt>
+<dt id="utils.NameLog.record">
+<code class="sig-name descname"><span class="pre">record</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#NameLog.record"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.NameLog.record" title="Permalink to this definition">¶</a></dt>
 <dd><p>Inspects current and calling frames to record the value of tracked variables.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="utils.Log.track">
-<code class="sig-name descname"><span class="pre">track</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Log.track"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Log.track" title="Permalink to this definition">¶</a></dt>
+<dt id="utils.NameLog.track">
+<code class="sig-name descname"><span class="pre">track</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#NameLog.track"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.NameLog.track" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds names to list of tracked variables.</p>
 </dd></dl>
 
@@ -215,7 +249,7 @@ If the code before the decorated function call is unchanged the results are retr
 <dt id="utils.StopWatch">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">StopWatch</span></code><a class="reference internal" href="_modules/utils.html#StopWatch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.StopWatch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A simple class implementing a stopwatch</p>
+<p>A class implementing a stopwatch.</p>
 <dl class="py method">
 <dt id="utils.StopWatch.elapsed">
 <code class="sig-name descname"><span class="pre">elapsed</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#StopWatch.elapsed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.StopWatch.elapsed" title="Permalink to this definition">¶</a></dt>
@@ -242,6 +276,30 @@ If the code before the decorated function call is unchanged the results are retr
 <dd><p>Stops the stopwatch and raises an error if it hadn’t been started.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt id="utils.Tagger">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">Tagger</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Tagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Tagger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class implementing experiment tags generation.
+It usese a adjective-noun{-random_id} structure.</p>
+<dl class="py method">
+<dt id="utils.Tagger.make">
+<code class="sig-name descname"><span class="pre">make</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Tagger.make"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Tagger.make" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="utils.Tagger.size">
+<code class="sig-name descname"><span class="pre">size</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#Tagger.size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.Tagger.size" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.chunker">
+<code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">chunker</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">l</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#chunker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.chunker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield successive n-sized chunks from l.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -281,7 +339,7 @@ If the code before the decorated function call is unchanged the results are retr
 <dd><p>Calculates size of folder in MegaBytes</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>folder</strong> – path of the target folder</p>
+<dd class="field-odd"><p><strong>folder</strong> (<em>str</em>) – path of the target folder</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Folder size in MegaBytes</p>
@@ -290,6 +348,18 @@ If the code before the decorated function call is unchanged the results are retr
 <dd class="field-odd"><p>float</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.here">
+<code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">here</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#here"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.here" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the folder of the current script. Used to load files local to module.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="utils.id_generator">
+<code class="sig-prename descclassname"><span class="pre">utils.</span></code><code class="sig-name descname"><span class="pre">id_generator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'abcdefghijklmnopqrstuvwxyz'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/utils.html#id_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#utils.id_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generated random lowercase string of length <cite>size</cite></p>
 </dd></dl>
 
 <dl class="py function">
@@ -309,6 +379,9 @@ Lists are truncated and dictionaries are formatted with pretty-print.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>value of the variable “name”, None if not found.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str or None</p>
 </dd>
 </dl>
 </dd></dl>

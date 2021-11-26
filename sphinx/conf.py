@@ -13,7 +13,7 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath("../protoutils/"))
+sys.path.insert(0, os.path.abspath(".."))
 
 
 # -- Project information -----------------------------------------------------
@@ -28,7 +28,11 @@ author = "Lapo Frati"
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ["sphinx.ext.autodoc","sphinx.ext.viewcode"]
+extensions = ["sphinx.ext.autodoc",  # turn docstrings into documentation
+              "sphinx.ext.viewcode", # add links to sourcecode
+              "sphinx.ext.napoleon"] # parse both numpydoc and google style
+
+# numpydoc_show_class_members = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
