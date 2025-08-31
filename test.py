@@ -54,8 +54,6 @@ def main():
     iprint(f"Got {res}")
     iprint(f"Elapsed {watch.elapsed()}")
 
-    exit()
-
     tagger = Tagger()
     print("Basic")
     print(f"# possible tags: {tagger.size():,}")
@@ -90,6 +88,8 @@ def main():
         print(tagger.make())
 
     print()
+
+    print("END")
 
 
 if __name__ == "__main__":

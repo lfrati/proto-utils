@@ -57,7 +57,7 @@ class CodeMemo:
     """
     Serialized memoization class for medium running scripts (seconds to minutes).
     The results of the decorated functions are serialized to pickles in the ./saved folder.
-    Pickles are named using the md5 hash of code before the function call (ingoring imports and formatting.)
+    Pickles are named using the md5 hash of code before the function call (ignoring imports and formatting.)
     If the code before the decorated function call is unchanged the results are retrieved from the pickles.
 
     Parameters
@@ -304,8 +304,8 @@ def chunker(l, chunk_size):
 
 class GracefulDeath:
     """
-    A signal handler that allows triggering behaviour using CTRL+C and CTRL+Z.
-    Use double CTRL+C to force stop or CTRL+Y to sent SIGQUIT
+    A signal handler that allows triggering behaviour using CTRL+C and CTRL+\\.
+    Use double CTRL+C to force stop or CTRL+\\ to trigger the signalled() method
 
     .. code-block:: python
 
@@ -326,9 +326,9 @@ class GracefulDeath:
         self.stopped = False
 
     def __enter__(self):
-        # Register our modified handler for SIGINT (CTRL + C), and SIGTSTP (CTRL + Z)
+        # Register our modified handler for SIGINT (CTRL + C), and SIGQUIT (CTRL + \)
         self.old_handler1 = signal.signal(signal.SIGINT, self.handler)
-        self.old_handler2 = signal.signal(signal.SIGTSTP, self.handler)
+        self.old_handler2 = signal.signal(signal.SIGQUIT, self.handler)
         return self
 
     def handler(self, sig, frame):
@@ -339,14 +339,14 @@ class GracefulDeath:
             else:
                 print("Double SIGINT received: Terminating immediately.")
                 self.old_handler1(sig, frame)
-        if sig == signal.SIGTSTP:  # CTRL + Z
+        if sig == signal.SIGQUIT:  # CTRL + \
             self.stopped = True
-            print("SIGSTOP received")
+            print("SIGQUIT received (Ctrl+\\)")
 
     def __exit__(self, type, value, traceback):
         # Restore original handler
         signal.signal(signal.SIGINT, self.old_handler1)
-        signal.signal(signal.SIGTSTP, self.old_handler2)
+        signal.signal(signal.SIGQUIT, self.old_handler2)
 
     def killed(self):
         return not self.alive
