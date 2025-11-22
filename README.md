@@ -34,7 +34,26 @@ print(log.tracked)
 
 ## Utilities Overview
 
-### 🔍 Enhanced Printing (`iprint`)
+### Task spinner
+
+```python
+"""
+ Each job spec is a mapping with:
+            - label (str): unique job identifier (display + result key)
+            - fn (callable): function to execute
+            - args (iterable, optional): positional args for fn
+            - kwargs (mapping, optional): keyword args for fn
+"""
+results = Spinner.run_jobs(job_specs, max_workers=len(jobs))
+for label, result in results.items():
+    print(f"  {label}: {result}")
+
+```
+
+![spinner](https://github.com/user-attachments/assets/d986ba08-6e6c-494f-839e-15db5371245f)
+
+
+### Enhanced Printing (`iprint`)
 
 Smart printing with line information, call stack, and intelligent truncation of large data structures.
 
@@ -62,7 +81,7 @@ def bar():
                           # Output: [13 main/bar]: inside bar (when called directly)
 ```
 
-### ⏱️ StopWatch
+### StopWatch
 
 Simple timing utility for measuring code execution time.
 
@@ -85,7 +104,7 @@ watch = StopWatch()
 watch.stop()   # Raises RuntimeError: Stopwatch not started yet!
 ```
 
-### 📊 NameLog
+### NameLog
 
 Track variable values across function calls and record their history.
 
@@ -117,7 +136,7 @@ print(log2.tracked)  # Output: {'accuracy': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
 print(log2.get("accuracy"))  # Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-### 💾 CodeMemo
+### CodeMemo
 
 Serialized memoization for medium-running scripts. Caches function results based on code state.
 
@@ -156,7 +175,7 @@ iprint(f"Got {res}")      # Output: [54 main]: Got 4
 iprint(f"Elapsed {watch.elapsed()}")  # Output: [55 main]: Elapsed 0:00:05.007341
 ```
 
-### 🏷️ Tagger
+### Tagger
 
 Generate unique experiment tags using adjective-noun combinations.
 
@@ -203,7 +222,7 @@ for i in range(5):
 # b'untried-ambition-jzx'
 ```
 
-### 🛑 GracefulDeath
+### GracefulDeath
 
 Handle Ctrl+C and Ctrl+Z signals gracefully in long-running scripts.
 
@@ -229,7 +248,7 @@ with GracefulDeath() as cm:
 print("Exited gracefully")
 ```
 
-### 🎨 Color Utilities
+### Color Utilities
 
 Add colors to your terminal output.
 
@@ -241,7 +260,7 @@ print(color("Warning!", "warn"))
 print(color("Error!", "red"))
 ```
 
-### 📁 File Utilities
+### File Utilities
 
 ```python
 from utils import folder_size, here
@@ -255,7 +274,7 @@ size_mb = folder_size("./saved")
 print(f"Saved folder size: {size_mb:.2f} MB")
 ```
 
-### 🔧 List Utilities
+### List Utilities
 
 ```python
 from utils import flatten, unzip, chunker
